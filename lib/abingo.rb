@@ -140,8 +140,10 @@ class Abingo
   end
 
   def wait_for_lock_release(lock_key)
-    while Abingo.cache.exist?(lock_key)
+    i = 0
+    while Abingo.cache.exist?(lock_key) && i < 10
       sleep(0.1)
+      i += 1
     end
   end
 
